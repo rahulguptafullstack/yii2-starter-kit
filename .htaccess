@@ -1,0 +1,12 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule ^(frontend|backend)/web/ - [L]
+RewriteRule ^api(/(.*))?$ api/web/$3 [S=2]
+RewriteRule ^admin(/(.*))?$ backend/web/$2 [S=1]
+
+RewriteRule .* frontend/web/$0
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+/web)/.*$ $1/index.php
